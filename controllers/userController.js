@@ -8,11 +8,14 @@ exports.home = (req, res) => {
 };
 
 exports.register = (req, res) => {
-    let user = new User(req.body);
-    user.register();
-    res.send("Thanks for trying to register")
-    
-};
-
+    let user = new User(req.body);      // User Blueprint - Model
+    user.register()
+    if (user.errors.length){
+        res.send(user.errors)
+    } else {
+        res.send("Congrats. No Errors")
+    }
+}
+  
 exports.login = () => {};
-exports.logout= () => {};
+exports.logout = () => {};
