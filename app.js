@@ -4,6 +4,10 @@ const app = express();
 
 const router = require('./router');
 
+// Add the user submitted data onto our request object.
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
 // first parameter views is express feature, second one is the file name
 app.use(express.static("public"));
 app.set('views', 'views');
