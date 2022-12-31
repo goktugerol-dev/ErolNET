@@ -1,3 +1,5 @@
+const usersCollection = require('../db').collection("users");
+
 const validator = require("validator");
 
 // Creating a variable with constructor function.
@@ -39,6 +41,9 @@ User.prototype.register = function () {
     this.cleanUp();
     this.validate();
     // 2: Only if there are no validation errors: Save the user data into database
+    if (!this.errors.length) {
+        usersCollection.insertOne(this.data)
+    }
 }
 
 

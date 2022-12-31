@@ -15,4 +15,5 @@ app.set('view engine', 'ejs');
 
 app.use('/', router);
 
-app.listen(3000);
+// app.listen(3000); the app will wait db to connect, after an established connection it it will start
+module.exports = app;
