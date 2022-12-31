@@ -7,6 +7,19 @@ let User = function (data) {
     // this.unicorn = data;   name doesn't need to match, just creating a property
 }
 
+User.prototype.cleanUp = function () {
+    if(typeof(this.data.username) != "string"){this.data.username = ""}
+    if(typeof(this.data.email) != "string"){this.data.email = ""}
+    if(typeof(this.data.password) != "string"){this.data.password = ""}
+
+    // Get rid of any bogus properties
+    this.data = {
+        username: this.data.username.trim().toLowerCase(),
+        email: this.data.email.trim().toLowerCase(),
+        password: this.data.password
+    }
+}
+
 User.prototype.validate = function() {
     if (this.data.username == "") { this.errors.push("You must provide a username.")}
     if (this.data.username != "" && !validator.isAlphanumeric(this.data.username)){this.errors.push("Username can only contain letters and numbers")}
@@ -23,7 +36,8 @@ User.prototype.validate = function() {
 // .register can be also any name but I used register because It's to register
 User.prototype.register = function () {
     // 1: Validate user data:
-    this.validate()
+    this.cleanUp();
+    this.validate();
     // 2: Only if there are no validation errors: Save the user data into database
 }
 
